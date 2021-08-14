@@ -17,7 +17,7 @@ re_path = re.compile(r'\"rootFolder\":\"(.*)\",\"view\"')
 re_data = re.compile(r'var\sg_listData\s=\s{\"wpq\":\"\",\"Templates\":{},\"ListData\":{\s\"Row\"\s:\s(.*\"RemoteItem\":\s\"\"\s*}\s*\])\s*,\"', re.S)
 re_next = re.compile(r'\"NextHref\"\s:\s\"(.*)\"')
 def GetFiles(link, depth=0, isReserveFolder=False) :
-#	print('Info: 正在解析 ' + link)
+	print('Info: 正在解析 ' + link)
 	filelist = []
 	try :
 		response = requests.get(link, headers={'User-Agent': g_ua}, cookies=g_cookies, timeout=1.0)
@@ -228,9 +228,8 @@ def BtDownload_Click() :
 		tk.messagebox.showinfo('提示', '当前已有正在进行的下载任务')
 		return
 	if not os.path.isdir(wd_enDownloadDir.get()) :
-		BtSetDownloadDir_Click()
-		if not os.path.isdir(wd_enDownloadDir.get()) :
-			return
+		tk.messagebox.showinfo('提示', '下载路径无效，请重新设置')
+		return
 	# 获取选中项
 	downlist = []
 	for idx in cursel :
